@@ -5,6 +5,7 @@ import { UserService } from "./user.service";
 
 export const createUser : RequestHandler = async(req  ,res , next ) => {
 
+
     try{
 
     const {user} = req.body ;
