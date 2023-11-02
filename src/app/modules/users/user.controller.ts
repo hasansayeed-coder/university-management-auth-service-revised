@@ -12,7 +12,7 @@ import httpStatus from "http-status";
 
     const result = await UserService.createUser(user) ;
 
-    next() ;
+    
 
     // res.status(200).json({
     //     success: true,
@@ -24,6 +24,8 @@ import httpStatus from "http-status";
         statusCode : httpStatus.OK ,
         success :true , 
         message : "User created Successfully" , data : result})
+
+        next() ;
 })
 
 export const  UserController = {
