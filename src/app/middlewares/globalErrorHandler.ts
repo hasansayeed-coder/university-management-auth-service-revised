@@ -6,6 +6,8 @@ import Config from "../../Config";
 import handleValidationError from "../../errors/handleValidationError";
 import ApiError from "../../errors/ApiError";
 import { errorlogger } from "../../share/logger";
+import { ZodError } from "zod";
+import handleZodError from "../../errors/handleZodError";
 
 // ErrorTransportPattern
 const globalErrorHandler : ErrorRequestHandler = (error , req , res  , next  ) =>{
@@ -38,6 +40,13 @@ const globalErrorHandler : ErrorRequestHandler = (error , req , res  , next  ) =
 
     if(error.name === 'ValidationError'){
       const simplifiedError = handleValidationError(error) ;
+      statusCode = simplifiedError.statusCode ;
+      message = simplifiedError.message ;
+      errorMessages = simplifiedError.errorMessages ;
+    }
+
+    else if(error instanceof ZodError){
+      const simplifiedError = handleZodError(error) ;
       statusCode = simplifiedError.statusCode ;
       message = simplifiedError.message ;
       errorMessages = simplifiedError.errorMessages ;
