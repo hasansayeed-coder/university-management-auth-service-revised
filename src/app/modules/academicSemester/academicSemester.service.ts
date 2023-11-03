@@ -93,7 +93,9 @@ const getAllSemester = async(filters : IAcademicSemesterFilters , paginationOpti
         sortConditions[sortBy] = sortOrder ;
     }
 
-    const result = await AcademicSemester.find({$and : andConditions}).sort(sortConditions).skip(skip).limit(limit) ;
+    const whereConditions = andConditions.length > 0 ? {$and : andConditions} : {} ;
+
+    const result = await AcademicSemester.find(whereConditions).sort(sortConditions).skip(skip).limit(limit) ;
     const total = await AcademicSemester.countDocuments() ;
 
     return {
@@ -106,8 +108,15 @@ const getAllSemester = async(filters : IAcademicSemesterFilters , paginationOpti
     } ;
 }
 
+const getSingleSemester = async(id : string)  : Promise<IAcademicSemester | null> => {
+    const result = await AcademicSemester.findById(id) ;
+
+    return result ;
+}
+
 
 export const AcademicSemesterService = {
     createSemester , 
-    getAllSemester
+    getAllSemester , 
+    getSingleSemester
 }

@@ -11,7 +11,7 @@ type IApiresponse<T> = {
             
         } ;
         data ?: T | null ;
-}
+};
 
 const sendResponse = <T>(
     res :Response , 
@@ -21,8 +21,8 @@ const sendResponse = <T>(
         statusCode : data.statusCode,
         success : data.success , 
         message :  data.message || null,
-        meta : data.meta ,
-        data : data.data || null
+        meta : data.meta  || undefined ,
+        data : data.data || null ,
 
     }
 
