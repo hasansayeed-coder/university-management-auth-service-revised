@@ -5,7 +5,7 @@ import httpStatus from "http-status";
 
 
 
- const createUser = catchAsync(async(req ,res , next) => {
+ const createUser = catchAsync(async(req ,res ) => {
 
     const {user} = req.body ;
 
@@ -25,7 +25,6 @@ import httpStatus from "http-status";
         success :true , 
         message : "User created Successfully" , data : result})
 
-        next() ;
 })
 
 export const  UserController = {
