@@ -11,7 +11,7 @@ import handleZodError from "../../errors/handleZodError";
 import handleCastError from "../../errors/handleCastError";
 
 // ErrorTransportPattern
-const globalErrorHandler : ErrorRequestHandler = (error , req , res  , next  ) =>{
+const globalErrorHandler : ErrorRequestHandler = (error , req , res    ) =>{
 
     // console.log(err) ;
   
@@ -95,12 +95,6 @@ const globalErrorHandler : ErrorRequestHandler = (error , req , res  , next  ) =
 
     })
 
-
-    
-
-    
-
-    next() ; 
 }
 
 export default globalErrorHandler ;
