@@ -8,7 +8,7 @@ import { paginationFields } from "../../../constants/pagination";
 import { IAcademicSemester } from "./academicSemester.interface";
 import { academicSemesterFilterableFields } from "./academicSemester.Constant";
 
-const createSemester  = catchAsync(async(req : Request , res : Response , next : NextFunction) => {
+const createSemester  = catchAsync(async(req : Request , res : Response) => {
 
     const {...academicSemesterData} = req.body ;
 
@@ -26,11 +26,11 @@ const createSemester  = catchAsync(async(req : Request , res : Response , next :
         success :true , 
         message : "Academic Semester created Successfully" , data : result})
 
-        next();
+     
 })
 
 const getAllSemester = catchAsync(
-    async(req : Request , res : Response , next : NextFunction) => {
+    async(req : Request , res : Response ) => {
 
         const filters = pick(req.query , academicSemesterFilterableFields) ;
 
@@ -53,7 +53,6 @@ const getAllSemester = catchAsync(
             data : result.data
         })
     
-        next();
 
     }
 )
@@ -89,9 +88,26 @@ const updateSemester = catchAsync(async(req , res ) => {
 
 })
 
+const deleteSemester = catchAsync(async(req , res ) => {
+
+    const id = req.params.id ;
+
+    const result = await AcademicSemesterService.deleteSemester(id) ;
+
+    sendResponse<IAcademicSemester>(res , {
+        statusCode : httpStatus.OK ,
+        success :true , 
+        message : "Semester deleted Successfully" , 
+        data : result      
+    }) ;
+
+})
+
 export const AcademicSemesterController = {
     createSemester ,
     getAllSemester , 
     getSingleSemester ,
-    updateSemester
+    updateSemester , 
+    deleteSemester
+    
 }
