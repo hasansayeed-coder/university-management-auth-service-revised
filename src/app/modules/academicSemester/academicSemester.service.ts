@@ -21,10 +21,6 @@ if(academicSemesterTitleMapper[payload.title] !== payload.code){
     return result ;
 }
 
-
-
-
-
 const getAllSemester = async(filters : IAcademicSemesterFilters , paginationOptions : IPaginationOptions) : Promise<IGenericResponse<IAcademicSemester[]>> => {
 
     const {searchTerm , ...filtersData} = filters ;
@@ -126,10 +122,22 @@ const updateSemester = async(id : string , payload : Partial<IAcademicSemester>)
 
 }
 
+const deleteSemester = async(id : string ) : Promise<IAcademicSemester | null> => {
+
+    
+
+    const result = await AcademicSemester.findByIdAndDelete({_id : id}) ;
+
+    return result ;
+
+}
+
+
 
 export const AcademicSemesterService = {
     createSemester , 
     getAllSemester , 
     getSingleSemester , 
-    updateSemester
+    updateSemester, 
+    deleteSemester ,
 }
